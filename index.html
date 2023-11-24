@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Convites Discord</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #result {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Calculadora de Convites Discord</h1>
+
+  <label for="time">Tempo (segundos):</label>
+  <input type="number" id="time" value="30">
+
+  <label for="rate">Taxa de convite por segundo:</label>
+  <input type="number" id="rate" step="0.1" value="1">
+
+  <label for="acceptance">Taxa de aceitação:</label>
+  <input type="number" id="acceptance" step="0.01" value="0.1">
+
+  <label for="response">Taxa de resposta:</label>
+  <input type="number" id="response" step="0.01" value="0.5">
+
+  <label for="avgResponseTime">Tempo médio de resposta (segundos):</label>
+  <input type="number" id="avgResponseTime" value="10">
+
+  <label for="mexiFactor">Fator Mexi (25% de aumento se for o Mexi divulgando):</label>
+  <input type="number" id="mexiFactor" step="0.01" value="0.25">
+
+  <button onclick="calculateInvites()">Calcular</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateInvites() {
+      const time = parseFloat(document.getElementById('time').value);
+      const rate = parseFloat(document.getElementById('rate').value);
+      const acceptance = parseFloat(document.getElementById('acceptance').value);
+      const response = parseFloat(document.getElementById('response').value);
+      const avgResponseTime = parseFloat(document.getElementById('avgResponseTime').value);
+      const mexiFactor = parseFloat(document.getElementById('mexiFactor').value);
+
+      const invites = (time * rate * acceptance * response * (1 + mexiFactor)) / (avgResponseTime * (1 + time / 100));
+
+      document.getElementById('result').innerHTML = `Você poderia hipoteticamente convidar aproximadamente ${invites.toFixed(2)} pessoas para o seu grupo do Discord em ${time} segundos.`;
+    }
+  </script>
+
+</body>
+</html>
