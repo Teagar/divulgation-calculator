@@ -18,7 +18,7 @@
       display: block;
       margin-top: 10px;
     }
-    input {
+    input, select {
       width: 100%;
       padding: 8px;
       margin-top: 5px;
@@ -33,6 +33,9 @@
       padding: 10px;
       border: none;
       cursor: pointer;
+    }
+    button:hover {
+      background-color: #4fa3d1;
     }
     #result {
       font-size: 1.2em;
@@ -59,8 +62,11 @@
   <label for="avgResponseTime">Tempo médio de resposta (segundos):</label>
   <input type="number" id="avgResponseTime" value="10">
 
-  <label for="mexiFactor">Fator Mexi (25% de aumento se for o Mexi divulgando):</label>
-  <input type="number" id="mexiFactor" step="0.01" value="0.25">
+  <label for="mexiOption">Mexi divulgando?</label>
+  <select id="mexiOption">
+    <option value="0" style="background-color: #282c34; color: #ffffff;">Não</option>
+    <option value="0.25" style="background-color: #282c34; color: #ffffff;">Sim (25% de aumento)</option>
+  </select>
 
   <button onclick="calculateInvites()">Calcular</button>
 
@@ -73,7 +79,7 @@
       const acceptance = parseFloat(document.getElementById('acceptance').value);
       const response = parseFloat(document.getElementById('response').value);
       const avgResponseTime = parseFloat(document.getElementById('avgResponseTime').value);
-      const mexiFactor = parseFloat(document.getElementById('mexiFactor').value);
+      const mexiFactor = parseFloat(document.getElementById('mexiOption').value);
 
       const invites = (time * rate * acceptance * response * (1 + mexiFactor)) / (avgResponseTime * (1 + time / 100));
 
